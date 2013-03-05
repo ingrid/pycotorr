@@ -21,6 +21,15 @@ class Client(object):
         torr = Torrent(file)
         self.active_torrents.append(torr)
 
+    def seed(self, file):
+        pass
+
+    def save_seesion(self):
+        pass
+
+    def load_session(self):
+        pass
+
 class Torrent(object):
     # A wrapper for both the torrenting session for a single file and the file metadata.
     def __init__(self, file):
@@ -33,11 +42,14 @@ class Torrent(object):
                    'downloaded':'0',
                    'key':'2c4dec5f',
                    'left':'0',
-                   'no_peer_id':'0',
-                   'event':'started',
-                   'numwant':'80'}
+                 # 'no_peer_id':0,
+                 # 'event':'started',
+                 # 'numwant':'80',
+                 # 'compact':'1',
+                   }
 
         response = requests.get(self.meta_data['announce'], params=payload)
+        print "!!!", response.content
         response = bdecode(response.content)
 
         peers = response['peers']
